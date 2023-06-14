@@ -5,7 +5,7 @@
 
   <main class="app-main">
     <AppTodoList 
-      :todos="todos"
+      :todos="filteredTodos"
       @toggle-todo="toggleTodo" 
       @remove-todo="removeTodo" 
     />
@@ -49,6 +49,20 @@ export default defineComponent({
       ],
 
       activeFilter: 'All'
+    }
+  },
+
+  computed: {
+    filteredTodos(): Todo[] {
+      switch (this.activeFilter) {
+        case 'Active':
+          return this.todos.filter((todo: Todo) => !todo.completed)
+        case 'Done':
+          return this.todos.filter((todo: Todo) => todo.completed)
+        case 'All':
+        default:
+          return this.todos
+      }
     }
   },
 
