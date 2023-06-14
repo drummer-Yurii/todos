@@ -1,13 +1,7 @@
 <template>
   <AppHeader />
 
-  <aside class="app-filters">
-    <section class="toggle-group">
-      <button class="button button--primary">All</button>
-      <button class="button">Active</button>
-      <button class="button">Done</button>
-    </section>
-  </aside>
+  <AppFilters />
 
   <main class="app-main">
     <ul class="todo-list">
@@ -62,10 +56,12 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import AppHeader from "./components/AppHeader.vue";
+import AppFilters from "./components/AppFilters.vue";
 
 export default defineComponent({
   components: {
-    AppHeader
+    AppHeader,
+    AppFilters
   }
 })
 </script>
