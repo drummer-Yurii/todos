@@ -1,7 +1,7 @@
 <template>
   <AppHeader />
 
-  <AppFilters />
+  <AppFilters :active-filter="activeFilter" @set-filter="setFilter" />
 
   <main class="app-main">
     <AppTodoList 
@@ -24,9 +24,11 @@ import AppTodoList from "./components/AppTodoList.vue";
 import AppAddTodo from "./components/AppAddTodo.vue";
 import AppFooter from "./components/AppFooter.vue";
 import { Todo } from "./types/Todo";
+import { Filter } from "./types/Filter";
 
 interface State {
-  todos: Todo[]
+  todos: Todo[],
+  activeFilter: Filter
 }
 
 export default defineComponent({
@@ -44,14 +46,15 @@ export default defineComponent({
         { id: 0, text: 'Learn the basics of Vue', completed: true },
         { id: 1, text: 'Learn the basics of Typescript', completed: false },
         { id: 2, text: 'Subscribe to the channel', completed: false },
-      ]
+      ],
+
+      activeFilter: 'All'
     }
   },
 
   methods: {
     addTodo(todo: Todo) {
       this.todos.push(todo)
-
     },
 
     toggleTodo(id: number) {
@@ -63,7 +66,11 @@ export default defineComponent({
 
     removeTodo(id: number) {
       this.todos = this.todos.filter((todo: Todo) => todo.id !== id)
+    },
+
+    setFilter(filter: Filter) {
+      this.activeFilter = filter
     }
-  },
+  }
 })
 </script>
